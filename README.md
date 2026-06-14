@@ -32,8 +32,8 @@ Order status distribution
 Its goal is to help management monitor sales performance, identify top-performing areas, and make data-driven business decisions.
 
 # Repository Structure
-  Data : <a href "https://github.com/beena155/Amazon-E-Commerce-Sales-Dashboard-using-Power-BI/blob/main/Amazon%20Sale%20Report.7z"></a>
-  Dashboard : Power BI (.pbix) for the project.
+  Data : <a href "https://github.com/beena155/Amazon-E-Commerce-Sales-Dashboard-using-Power-BI/blob/main/Amazon%20Sale%20Report.7z"></a> <br />
+  Dashboard : Power BI (.pbix) for the project.<br />
   Image : contains screenshot of the dashboard for easy preview.
 
 # Feedback 

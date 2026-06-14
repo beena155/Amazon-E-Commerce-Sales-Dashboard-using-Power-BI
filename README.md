@@ -34,7 +34,7 @@ Its goal is to help management monitor sales performance, identify top-performin
 # Repository Structure
   Data : <a href "https://github.com/beena155/Amazon-E-Commerce-Sales-Dashboard-using-Power-BI/blob/main/Amazon%20Sale%20Report.7z"></a> <br />
   Dashboard : Power BI (.pbix) for the project.<br />
-  Image : contains screenshot of the dashboard for easy preview.
+  Image : <img width="1357" height="672" alt="Amazan E-Commerce Dashboard ss" src="https://github.com/user-attachments/assets/6e855df4-e78d-475c-ae87-8783ba52f56d" />
 
 # Feedback 
 Open to feedback for improving dashboard design, performance, and insights.

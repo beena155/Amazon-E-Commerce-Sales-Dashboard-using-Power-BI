@@ -1,0 +1,112 @@
+create database amazonsales;
+use amazonsales;
+create table sales (`index` int,
+                    `order id` varchar(100),
+                     `date` varchar(20),
+                     `status` varchar(50),
+                     `fullfilment` varchar(20),
+                     `sales channel` varchar(20),
+                     `ship-service-level` varchar(20),
+                     `style` varchar(20),
+                     `SKU` text,
+                     `category` varchar(20),
+                     `size` varchar(20),
+                     `ASIN` varchar(20),
+                     `courier status` varchar(20),
+                     `qty` int,
+                     `currency` varchar(10),
+                     `amount` int,
+                     `ship-city` varchar(300),
+                     `ship-state` varchar(300),
+                     `ship-postal-code` varchar(300),
+                     `ship-county` varchar(300),
+                     `promotion-ids` text,
+                     `BSB` varchar(10),
+                     `final-fullfilled-by` varchar(20)
+                     );
+drop table sales;
+select * from sales;                    
+alter table sales modify column `promotion-ids` text;					
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/sales.csv'
+INTO TABLE sales
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS;
+
+
+# SUM OF SALES
+select sum(Amount) as totalsales 
+from sales;
+------------------------------------------------------------------------
+# SUM OF QTY
+select sum(qty) as QUANTITY
+from sales;
+------------------------------------------------------------------------
+# ESTIMATED PROFIT
+SELECT
+    SUM(Amount) AS Total_Sales,
+    SUM(Amount * 0.20) AS Estimated_Profit
+FROM sales;
+-------------------------------------------------------------------------
+# COUNT OF ORDER-ID
+select count(`order id`) as `total-orderid` from sales;
+--------------------------------------------------------------------------
+# AVERAGE ORDER VALUE
+SELECT
+    SUM(Amount) AS Total_Sales,
+    COUNT(DISTINCT `Order ID`) AS Total_Orders,
+    SUM(Amount) / COUNT(DISTINCT `Order ID`) AS Average_Order_Value
+FROM sales;
+---------------------------------------------------------------------------
+# SUM OF SALES AND ESTIMATED PROFIT BY YEAR AND MONTH
+SELECT
+    MONTH(str_to_date(date, '%m-%d-%y')) AS month,
+    day(str_to_date(date, '%m-%d-%y')) AS day,
+    SUM(amount) AS total_sales,
+    SUM(amount* 0.20) AS total_profit
+FROM sales
+group by  month, day;
+select date, amount from sales limit 10;
+---------------------------------------------------------------------
+# SUM OF SALES AND ESTIMATED PROFIT BY CATEGORY
+SELECT
+    category,
+    SUM(amount) AS total_sales,
+    SUM(amount * 0.20) AS total_profit
+FROM sales
+GROUP BY category
+ORDER BY total_sales DESC;
+-------------------------------------------------------------------
+# SUM OF QTY BY STATUS 
+SELECT
+    status,
+    SUM(qty) AS total_quantity
+FROM sales
+GROUP BY status
+ORDER BY total_quantity DESC;
+--------------------------------------------------------------------
+# SALES BY STATE AND CITY
+SELECT
+    `ship-state`,
+   `ship-city`,
+    SUM(amount) AS total_sales
+FROM sales
+GROUP BY  `ship-state`, `ship-city`
+ORDER BY total_sales DESC;
+--------------------------------------------------------------------
+# SALES BY STYLE 
+SELECT
+    style,
+    SUM(amount) AS total_sales
+FROM sales
+GROUP BY style
+ORDER BY total_sales DESC;
+-----------------------------------------------------------------------
+# SALES BY FULLFILLMENT METHOD
+SELECT
+    fullfilment,
+    SUM(amount) AS total_sales
+FROM sales
+GROUP BY fullfilment
+ORDER BY total_sales DESC;
